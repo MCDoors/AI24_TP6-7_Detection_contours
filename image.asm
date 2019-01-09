@@ -156,28 +156,28 @@ colonnes:
 		;Calcul de |Gx|
 		mov r15, 0								; Résultat du pixel (b22 = m11a11 + m12a12 + ... + m33a33)
 		
-		movzx rax, byte ptr [r8]				; |-1|  |  | (-1*[r8]) (1 er pixel du masque de convolution).						 |  | 0|  |
+		movzx rax, byte ptr [r8]					; |-1|  |  | (-1*[r8]) (1 er pixel du masque de convolution).						 |  | 0|  |
 		imul rax, -1							; |  |  |  | En toute rigueur mathématique il faudrait s'occuper des 0 :			 |  | 0|  |
 		add r15, rax							; |  |  |  | Informatiquement parlant, ça fait des calculs supplémentaires inutiles	 |  | 0|  |
 		
-		movzx rax, byte ptr [r8 + 8]			; |  |  | 1|
+		movzx rax, byte ptr [r8 + 8]					; |  |  | 1|
 		add r15, rax;							; |  |  |  |
-												; |  |  |  |
+										; |  |  |  |
 		
-		movzx rax, byte ptr [r8 + r10*4]		; |  |  |  |
+		movzx rax, byte ptr [r8 + r10*4]				; |  |  |  |
 		imul rax, -2							; |-2|  |  |
 		add r15, rax							; |  |  |  |
 		
 		
-		movzx rax, byte ptr [r8 + r10*4 + 8]	; |  |  |  |
-		imul rax, 2								; |  |  | 2|
+		movzx rax, byte ptr [r8 + r10*4 + 8]				; |  |  |  |
+		imul rax, 2							; |  |  | 2|
 		add r15, rax							; |  |  |  |
 		
-		movzx rax, byte ptr [r8 + r10*8]		; |  |  |  |
+		movzx rax, byte ptr [r8 + r10*8]				; |  |  |  |
 		imul rax, -1							; |  |  |  |
 		add r15, rax							; |-1|  |  |
 		
-		movzx rax, byte ptr [r8 + r10*8 + 8]	; |  |  |  |
+		movzx rax, byte ptr [r8 + r10*8 + 8]				; |  |  |  |
 		imul rax, -1							; |  |  |  |
 		add r15, rax							; |  |  | 1|
 		
@@ -196,27 +196,27 @@ calcul_Gy:
 		
 		mov r15, 0			; Réinitialisation de r15 à 0 pour stocker le résultat de Gy
 		
-		movzx rax, byte ptr [r8]				; | 1|  |  |
+		movzx rax, byte ptr [r8]					; | 1|  |  |
 		add r15, rax							; |  |  |  |
-												; |  |  |  |
+										; |  |  |  |
 		
-		movzx rax, byte ptr [r8 + 4]			; |  | 2|  |
-		imul rax, 2								; |  |  |  |
+		movzx rax, byte ptr [r8 + 4]					; |  | 2|  |
+		imul rax, 2							; |  |  |  |
 		add r15, rax							; |  |  |  |
 		
-		movzx rax, byte ptr [r8 + 8]			; |  |  | 1|
+		movzx rax, byte ptr [r8 + 8]					; |  |  | 1|
 		add r15, rax							; |  |  |  |
-												; |  |  |  |
+										; |  |  |  |
 		
-		movzx rax, byte ptr [r8 + r10*8]		; |  |  |  |
+		movzx rax, byte ptr [r8 + r10*8]				; |  |  |  |
 		imul rax, -1							; |  |  |  |
 		add r15, rax							; |-1|  |  |
 		
-		movzx rax, byte ptr [r8 + r10*8 + 4]	; |  |  |  |
+		movzx rax, byte ptr [r8 + r10*8 + 4]				; |  |  |  |
 		imul rax, -2							; |  |  |  |
 		add r15, rax							; |  |-2|  |
 		
-		movzx rax, byte ptr [r8 + r10*8 + 8]	; |  |  |  |
+		movzx rax, byte ptr [r8 + r10*8 + 8]				; |  |  |  |
 		imul rax, -1							; |  |  |  |
 		add r15, rax							; |  |  |-1|
 		
